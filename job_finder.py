@@ -2,12 +2,15 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
+lang = input("Enter your programming language of choice (example: python/html/java): ")
+
 def job_hunt(): #webscraper function using BeautifulSoup
     html_text = requests.get(
-        'https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text #website being scraped
+        f'https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords={lang}&txtLocation='
+        ).text #website being scraped
     soup = BeautifulSoup(html_text, 'lxml')
     jobs = soup.find_all('li', class_='clearfix job-bx wht-shd-bx')
-    print("Jobs for python developer posted a few days ago:")
+    print(f"Jobs for {lang} developer posted a few days ago:")
     i = 1
     for job in jobs:
 
